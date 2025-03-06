@@ -188,12 +188,11 @@ export async function GET(request: Request) {
           columns {
             id
             title
-            type
           }
           groups {
             id
             title
-            items_page(limit: 100) {
+            items_page(limit: 20) {
               cursor
               items {
                 id
@@ -201,7 +200,6 @@ export async function GET(request: Request) {
                 column_values {
                   id
                   text
-                  value
                 }
               }
             }
@@ -209,6 +207,8 @@ export async function GET(request: Request) {
         }
       }
     `;
+
+    console.log('Making full query:', fullQuery);
 
     const fullResponse = await fetch(MONDAY_API_ENDPOINT, {
       method: 'POST',
@@ -220,8 +220,20 @@ export async function GET(request: Request) {
     });
 
     const fullData = await fullResponse.json();
+    console.log('Full response:', JSON.stringify(fullData, null, 2));
 
     if (!fullResponse.ok || fullData.errors) {
+      const error = fullData.errors?.[0];
+      if (error?.extensions?.code === 'COMPLEXITY_BUDGET_EXHAUSTED') {
+        console.log('Complexity limit hit, will retry with smaller page size');
+        // Return what we have for now, we can implement pagination later if needed
+        return NextResponse.json([], { 
+          headers: {
+            ...corsHeaders,
+            'Retry-After': error.extensions.retry_in_seconds.toString()
+          }
+        });
+      }
       console.error('Error fetching board data:', fullData.errors || fullResponse.statusText);
       throw new Error(`Failed to fetch board data: ${JSON.stringify(fullData.errors || fullResponse.statusText)}`);
     }
@@ -232,7 +244,7 @@ export async function GET(request: Request) {
 
     const board = fullData.data.boards[0];
     if (!board.groups?.length) {
-      console.log('Board found but has no groups:', board);
+      console.log('No matching groups found:', board);
       return NextResponse.json([], { headers: corsHeaders });
     }
 
@@ -277,12 +289,9 @@ export async function GET(request: Request) {
           return {
             id: item.id,
             name: item.name,
-            accountId: columnValues.accountid || '',
-            customerPOC: columnValues.customerpoc || '',
-            status: columnValues.status || '',
-            effortLevel: columnValues.effortlevel || '',
-            type: columnValues.type || '',
-            numberOfClients: parseInt(columnValues.numberofclients || '0', 10)
+            accountId: columnValues.accountid || columnValues.account_id || '',
+            accountType: columnValues.accounttype || columnValues.account_type || '',
+            customerPOC: columnValues.customerpoc || columnValues.customer_poc || ''
           };
         });
       });

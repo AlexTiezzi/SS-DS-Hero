@@ -94,7 +94,7 @@ export default function GetInventory() {
         <CardHeader>
           <CardTitle>Retrieve Inventory Data</CardTitle>
           <CardDescription>
-            Get all inventory data including SKU, warehouse ID, bin location, kit information, 3PL customer, and
+            Get all inventory data including SKU, warehouse ID, bin location, kit information (kit and build kit Yes/No), 3PL customer, and
             quantity on hand. This data will be saved to Supabase for later use in the transition process.
           </CardDescription>
         </CardHeader>

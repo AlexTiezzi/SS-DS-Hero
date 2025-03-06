@@ -34,12 +34,12 @@ export default function ResumeSync() {
             <h3 className="mb-4 font-medium">Instructions:</h3>
             <ol className="ml-6 list-decimal space-y-3">
               <li>Log in to your ShipHero dashboard</li>
-              <li>Navigate to Settings &gt; Integrations</li>
+              <li>Navigate to My Account &gt; <a href="https://app.shiphero.com/dashboard/stores" target="_blank" rel="noopener noreferrer" className="text-blue-500">Stores</a></li>
               <li>
                 For each connected store:
                 <ul className="ml-6 list-disc mt-2">
                   <li>Click on the store name</li>
-                  <li>Toggle on "Inventory Sync"</li>
+                  <li>Toggle on "Have ShipHero manage my Shopify Inventory"</li>
                   <li>Save changes</li>
                 </ul>
               </li>

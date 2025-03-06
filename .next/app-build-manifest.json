@@ -21,6 +21,46 @@
       "static/chunks/main-app.js",
       "static/chunks/app/wizard/step2/page.js"
     ],
+    "/wizard/step3/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step3/page.js"
+    ],
+    "/wizard/step4/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step4/page.js"
+    ],
+    "/wizard/step5/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step5/page.js"
+    ],
+    "/wizard/step6/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step6/page.js"
+    ],
+    "/wizard/step7/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step7/page.js"
+    ],
+    "/wizard/step8/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step8/page.js"
+    ],
+    "/wizard/step9/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/step9/page.js"
+    ],
+    "/wizard/complete/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/complete/page.js"
+    ],
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

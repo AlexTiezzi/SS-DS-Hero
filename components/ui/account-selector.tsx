@@ -26,6 +26,7 @@ export function AccountSelector({ onAccountSelect }: AccountSelectorProps) {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -60,20 +61,38 @@ export function AccountSelector({ onAccountSelect }: AccountSelectorProps) {
   return (
     <div className="w-full max-w-md">
       <Select onValueChange={(value) => {
-        const selectedAccount = accounts.find(acc => acc.id === value);
-        if (selectedAccount) {
-          onAccountSelect(selectedAccount);
+        const account = accounts.find(acc => acc.accountId === value);
+        if (account) {
+          setSelectedAccount(account);
+          onAccountSelect(account);
         }
       }}>
-        <SelectTrigger>
-          <SelectValue placeholder="Select an account" />
+        <SelectTrigger className="w-full min-w-[300px]">
+          <SelectValue placeholder="Select an account">
+            {selectedAccount && (
+              <div className="flex flex-col items-start">
+                <div className="font-medium">
+                  {selectedAccount.name} - {selectedAccount.accountId || 'N/A'}
+                </div>
+              </div>
+            )}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
-          {accounts.map((account) => (
-            <SelectItem key={account.id} value={account.id}>
-              {account.name} - {account.accountId}
-            </SelectItem>
-          ))}
+          {accounts
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((account) => (
+              <SelectItem 
+                key={account.accountId} 
+                value={account.accountId}
+                className="flex flex-col items-start py-2"
+              >
+                <div className="font-medium">
+                  {account.name} - {account.accountId || 'N/A'}
+                </div>
+              </SelectItem>
+            ))
+          }
         </SelectContent>
       </Select>
     </div>

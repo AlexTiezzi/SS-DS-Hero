@@ -42,13 +42,13 @@ export default function StopInventorySync() {
           <div className="space-y-4">
             <h3 className="font-medium">Instructions:</h3>
             <ol className="ml-6 list-decimal space-y-2">
-              <li>Log in to your ShipHero dashboard</li>
+              <li>Log in to your ShipHero client dashboard through <a href="https://cash.shiphero.com/" target="_blank" rel="noopener noreferrer" className="text-blue-500">CASH</a></li>
               <li>Navigate to My Account &gt; <a href="https://app.shiphero.com/dashboard/stores" target="_blank" rel="noopener noreferrer" className="text-blue-500">Stores</a></li>
               <li>
                 For each connected store:
                 <ul className="ml-6 list-disc mt-2">
                   <li>Click on the store settings</li>
-                  <li>Toggle off "Inventory Sync"</li>
+                  <li>Toggle off "Have ShipHero manage my Shopify Inventory"</li>
                   <li>Save changes</li>
                 </ul>
               </li>

@@ -60,16 +60,8 @@ export default function Step1() {
                   <p>{selectedAccount.status}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Effort Level</p>
-                  <p>{selectedAccount.effortLevel}</p>
-                </div>
-                <div>
                   <p className="text-sm font-medium text-gray-500">Type</p>
                   <p>{selectedAccount.type}</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500">Number of Clients</p>
-                  <p>{selectedAccount.numberOfClients}</p>
                 </div>
               </div>
             </div>

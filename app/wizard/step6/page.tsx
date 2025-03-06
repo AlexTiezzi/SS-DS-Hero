@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,11 +10,15 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 export default function UpdateAccountType() {
   const [confirmed, setConfirmed] = useState(false)
+  const [accountName, setAccountName] = useState("Selected Account")
   const router = useRouter()
 
-  // Get account name from localStorage (in a real app, this would be from state management)
-  const accountName =
-    typeof window !== "undefined" ? localStorage.getItem("transitionAccount") || "Selected Account" : "Selected Account"
+  useEffect(() => {
+    const storedAccount = localStorage.getItem("transitionAccount")
+    if (storedAccount) {
+      setAccountName(storedAccount)
+    }
+  }, [])
 
   const handleContinue = () => {
     if (confirmed) {
