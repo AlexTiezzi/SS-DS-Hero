@@ -1,4 +1,6 @@
 {
+  "/page": "app/page.js",
   "/api/monday/accounts/route": "app/api/monday/accounts/route.js",
-  "/wizard/step1/page": "app/wizard/step1/page.js"
+  "/wizard/step1/page": "app/wizard/step1/page.js",
+  "/wizard/step2/page": "app/wizard/step2/page.js"
 }

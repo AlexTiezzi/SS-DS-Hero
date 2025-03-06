@@ -53,6 +53,7 @@ interface MondayItem {
 }
 
 interface MondayItemsPage {
+  cursor: string;
   items: MondayItem[];
 }
 
@@ -192,7 +193,8 @@ export async function GET(request: Request) {
           groups {
             id
             title
-            items_page {
+            items_page(limit: 100) {
+              cursor
               items {
                 id
                 name
@@ -234,6 +236,13 @@ export async function GET(request: Request) {
       return NextResponse.json([], { headers: corsHeaders });
     }
 
+    console.log('Found board:', {
+      id: board.id,
+      name: board.name,
+      groupCount: board.groups.length,
+      columns: board.columns.map((c: MondayColumn) => ({ id: c.id, title: c.title }))
+    });
+
     // Create a map of column IDs to their titles
     const columnMap = board.columns.reduce((acc: Record<string, string>, col: MondayColumn) => {
       acc[col.id] = col.title.toLowerCase().replace(/\s+/g, '');
@@ -245,6 +254,12 @@ export async function GET(request: Request) {
     // Transform the data into the format expected by the frontend
     const accounts = board.groups
       .flatMap((group: MondayGroup) => {
+        console.log('Processing group:', {
+          id: group.id,
+          title: group.title,
+          itemCount: group.items_page?.items?.length || 0
+        });
+
         const items = group.items_page?.items || [];
         return items.map((item: MondayItem) => {
           const columnValues = item.column_values.reduce((acc: Record<string, string>, col: MondayColumnValue) => {
