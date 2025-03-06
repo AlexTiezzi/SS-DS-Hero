@@ -6,55 +6,74 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ArrowRight } from "lucide-react"
+import { AccountSelector } from "@/components/ui/account-selector"
 
-export default function SelectAccount() {
-  const [selectedAccount, setSelectedAccount] = useState<string>("")
+interface Account {
+  id: string;
+  name: string;
+  accountId: string;
+  customerPOC: string;
+  status: string;
+  effortLevel: string;
+  type: string;
+  numberOfClients: number;
+}
+
+export default function Step1() {
+  const [selectedAccount, setSelectedAccount] = useState<Account | null>(null)
   const router = useRouter()
-
-  // Mock accounts - in a real app, these would come from an API or database
-  const accounts = [
-    { id: "acc1", name: "Account 1" },
-    { id: "acc2", name: "Account 2" },
-    { id: "acc3", name: "Account 3" },
-  ]
 
   const handleContinue = () => {
     if (selectedAccount) {
       // In a real app, you'd save this to state/context or database
-      localStorage.setItem("transitionAccount", selectedAccount)
+      localStorage.setItem("transitionAccount", selectedAccount.id)
       router.push("/wizard/step2")
     }
   }
 
   return (
-    <div className="mx-auto max-w-3xl">
-      <h1 className="mb-6 text-2xl font-bold">Step 1: Select Account to Transition</h1>
-
+    <div className="container mx-auto py-10">
       <Card>
         <CardHeader>
-          <CardTitle>Account Selection</CardTitle>
+          <CardTitle>Select Account</CardTitle>
           <CardDescription>
-            Select the account you want to transition from static slotting (SS) to dynamic slotting (DS).
+            Choose the account you want to transition from the list below
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="account" className="text-sm font-medium">
-              Account
-            </label>
-            <Select value={selectedAccount} onValueChange={setSelectedAccount}>
-              <SelectTrigger id="account">
-                <SelectValue placeholder="Select an account" />
-              </SelectTrigger>
-              <SelectContent>
-                {accounts.map((account) => (
-                  <SelectItem key={account.id} value={account.id}>
-                    {account.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+        <CardContent>
+          <AccountSelector onAccountSelect={setSelectedAccount} />
+          
+          {selectedAccount && (
+            <div className="mt-6 space-y-4">
+              <h3 className="text-lg font-medium">Account Details</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Account ID</p>
+                  <p>{selectedAccount.accountId}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Customer POC</p>
+                  <p>{selectedAccount.customerPOC}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Status</p>
+                  <p>{selectedAccount.status}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Effort Level</p>
+                  <p>{selectedAccount.effortLevel}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Type</p>
+                  <p>{selectedAccount.type}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-500">Number of Clients</p>
+                  <p>{selectedAccount.numberOfClients}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="pt-4">
             <Button onClick={handleContinue} disabled={!selectedAccount} className="w-full">

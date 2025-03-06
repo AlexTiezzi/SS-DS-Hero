@@ -1,9 +1,14 @@
 {
   "pages": {
-    "/page": [
+    "/wizard/step1/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/wizard/step1/page.js"
+    ],
+    "/wizard/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/wizard/layout.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
