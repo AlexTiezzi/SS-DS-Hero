@@ -1,8 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/wizard/step6/page": "app/wizard/step6/page.js",
-  "/wizard/step7/page": "app/wizard/step7/page.js",
-  "/wizard/step8/page": "app/wizard/step8/page.js",
-  "/wizard/step9/page": "app/wizard/step9/page.js",
-  "/wizard/complete/page": "app/wizard/complete/page.js"
+  "/api/monday/accounts/route": "app/api/monday/accounts/route.js",
+  "/wizard/step1/page": "app/wizard/step1/page.js"
 }

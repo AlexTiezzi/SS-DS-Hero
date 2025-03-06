@@ -188,6 +188,7 @@ export async function GET(request: Request) {
           columns {
             id
             title
+            type
           }
           groups {
             id
@@ -200,6 +201,7 @@ export async function GET(request: Request) {
                 column_values {
                   id
                   text
+                  value
                 }
               }
             }
@@ -290,8 +292,10 @@ export async function GET(request: Request) {
             id: item.id,
             name: item.name,
             accountId: columnValues.accountid || columnValues.account_id || '',
-            accountType: columnValues.accounttype || columnValues.account_type || '',
-            customerPOC: columnValues.customerpoc || columnValues.customer_poc || ''
+            accountType: columnValues.accounttype || columnValues.account_type || columnValues.type || '',
+            customerPOC: columnValues.customerpoc || columnValues.customer_poc || '',
+            status: columnValues.status || '',
+            type: columnValues.type || ''
           };
         });
       });

@@ -8,8 +8,8 @@ export default function WizardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="border-b">
+    <div className="flex min-h-screen flex-col bg-background">
+      <header className="border-b border-border">
         <div className="container flex h-16 items-center px-4">
           <h1 className="text-lg font-semibold">Slotting Transition Wizard</h1>
         </div>
